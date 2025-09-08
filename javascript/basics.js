@@ -404,7 +404,7 @@ console.log(person2);
 console.log(person2.getBirthYear());    // dot
 console.log(person2.getFullName());
 
-// Prototype
+// Prototype (default object inside each object by default, and current object inherits some properties and methods)
 function Student(firstName, lastName, dob) {
     this.firstName = firstName;
     this.lastName = lastName;
