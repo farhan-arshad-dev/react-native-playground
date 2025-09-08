@@ -6,45 +6,55 @@ console.warn("This is a warning");
 // let -> Variable - ES6
 // const -> contatnt - ES6
 
-let score = 30;
+let score = 30; // variable
+console.log(score);
 score = 31;
 console.log(score);
+console.log(typeof score);
 
-const overs = 6;
+// dynamically types langugages
+score = "31";
+console.log(score);
+console.log(typeof score);
+
+const overs = 6;    // constant
 console.log(overs);
 
 // Data type: String, Numbers, Boolean, null, undefined, Symbol(ES-6)
 
 // varible/const name rules
 // by default variables are `undefine`
-// cannot be reserved keywords
-// should be meaningfull variables name
-// cannot start with number (1name)
-// cannot conatins space or hypen
-// they are case sensitive
+// Can't be a reserved keyword
+// Should be meangin full
+// Can't start with a number
+// Con't contain a space or hyphen (-)
+// Are case-sensitive
 
-// const should be initialized
-const name = 'Farhan';
-const age = 30;
-const rating = 4.5;
-const isCool = true;
-const x = null // null is type of object
-const y = undefined
+// const should be initialized, Premitive Types
+const name = 'Farhan';  // String Literal
+const age = 30;         // Number Literal
+const rating = 4.5;     // Number Literal
+const isCool = true;    // Boolean Literal
+const x = null          // null is the value(explicitly clear the content), and object is te type
+const y = undefined     // undefined both type and value
 
-let z; // by default variables are `undefine`
+let z;                  // by default variables type and values is `undefine`
 
 console.log(typeof name);
 console.log(typeof age);
 console.log(typeof rating);
 console.log(typeof isCool);
 console.log(typeof x);
+
+console.log(y);
+console.log(z);
 console.log(typeof y);
 console.log(typeof z);
 
 // Concatination
 console.log('My name is ' + name + ' and I am ' + age);
 // Template String
-const hello = `My name is ${name} and I am ${age}`
+const hello = `My name is ${name} and I am ${age}`      // Template Literals
 console.log(hello);
 
 // String properties and methods
@@ -65,13 +75,17 @@ console.log(string.split(',')); // split by chars
 Multi line comments
 */
 
+// Reference Types Array, funcations, object.
 // Arrays
+
+console.log("Reference Types");
 
 const numbers = new Array(1, 2, 3, 4, 5);      // index 0-4, array using object
 console.log(numbers);
 
 // using liters, and can caontain multi type data, JS is not the staticly typed (dynamically types)
 const fruits = ['apples', 'oranges', 'pearns', 10, true];
+console.log(typeof fruits);         // array is also the type of object
 console.log(fruits);
 console.log(fruits[1]);
 
@@ -108,9 +122,12 @@ const person = {
         state: 'MA'
     }
 }
-
+console.log("Object Oriented Programming");
 console.log(person);
-console.log(person.firstName);
+
+console.log(person.firstName);  // dot operator
+console.log(person["firstName"]);  // Bracket Notation
+
 console.log(person.firstName, person.lastName);
 console.log(person.hobbies[1]);
 console.log(person.address.city);
@@ -199,7 +216,6 @@ console.log(todoCompletedText);
 
 
 //Equality Operators
-
 /*
 `==` (Loose Equality)
 
@@ -337,7 +353,7 @@ switch (color) {
 
 // funcations introduce in ES6
 
-function addNums(num1 = 1, num2 = 1) {  // with default values
+function addNums(num1, num2) {      // type and value will be undefined by defautlt
     console.log(num1 + num2);
 }
 
@@ -351,10 +367,10 @@ function addNums1(num1 = 1, num2 = 1) {  // with default values, and the return 
 console.log(addNums1(5, 4));
 
 // Function Expression
-const greet = function(name) {
-  return 'Hi, I am the Funcation expression';
+const greet = function (name) {
+    return 'Hi, I am the Funcation expression';
 };
-console.log(greet())
+console.log(greet());
 
 // Arrow Functions
 console.log("Arrow Functions")
@@ -385,7 +401,7 @@ const person2 = new Person('Noman', 'Arshad', '09-13-1991');
 
 console.log(person1);   // method are vislble under ther person object
 console.log(person2);
-console.log(person2.getBirthYear());
+console.log(person2.getBirthYear());    // dot
 console.log(person2.getFullName());
 
 // Prototype
