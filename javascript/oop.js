@@ -208,5 +208,41 @@ try {
 console.log("a+b=", a + b);
 console.log("a+b=", a + b);
 
-// Shradha Khapra Videos Lecture 12 : Callbacks, Promises & Async Await | JavaScript Full Course
-// Async await, promise chains, callback hell (Async Programming)
+// Lexical Scope (Lexical this)
+
+// Problem
+console.log('Lexical Scope probleam');
+function startGame() {
+    this.lives = 0;
+    this.totaLives = function () {
+        console.log(this.lives);
+        (function () {
+            console.log('Lexical Scope probleam cont...');
+            // nested function will create own context for on each level,
+            // so unable to access/context of the parent fucntion this.lives value.
+            // to fix this we will use Arrow function will fix this probleam.
+            // can fix by create a new variable in the parent function scope,
+            // but will used Lexical this.
+            console.log(this.lives);    // this.lives will called for inner function.
+        })();
+    }
+};
+
+var mario = new startGame();
+mario.totaLives();
+
+// Solution with arrow function, in arrow s
+console.log('Lexical Scope Solution');
+function startGame1() {
+    this.lives = 1;
+    this.totaLives = ()=> {     // with arrow function the Lexical this will pass as a scope
+        console.log(this.lives);
+        (() => {    // with arrow function the Lexical this will pass as a scope
+            console.log('Lexical Scope Solution cont...');
+            console.log(this.lives);
+        })();
+    }
+};
+
+var mario1 = new startGame1();
+mario1.totaLives();
