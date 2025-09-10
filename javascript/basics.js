@@ -422,3 +422,65 @@ Student.prototype.getFullName = function () {
 // instantiate object
 const student1 = new Student('Farhan', 'Arshad', '1-20-1993');
 console.log(student1);     // method are vislble under ther person ->>prototype object along with constructure.
+
+
+// destructuring => extract values from arrays and object then assign them to variable in a convient way
+// [] = to perfrom array destructuring
+// {} = to perfrom object destructuring
+
+// Example-1 swap the values
+
+let a = 1;
+let b = 2;
+
+console.log(`a = ${a}`);
+console.log(`b = ${b}`);
+
+[a, b] = [b, a] // destructuring
+console.log('After destructuring');
+console.log(`a = ${a}`);
+console.log(`b = ${b}`);
+
+// Example-2 swap the 2 values in a array
+const colors = ["red", "green", "blue", "balck", "white"];
+
+console.log(`colors = ${colors}`);
+
+[colors[0], colors[4]] = [colors[4], colors[0]]; // destructuring
+
+console.log('After destructuring');
+console.log(`colors = ${colors}`);
+
+// Example-3 Assign array elements to variables
+const [firstColor, secondColor, thirdColor, ...extraColors] = colors;
+console.log('After destructuring');
+console.log(`FirstColor = ${firstColor}`);
+console.log(`SecondColor = ${secondColor}`);
+console.log(`thirdColor = ${thirdColor}`);
+console.log(`extraColors = ${extraColors}`);        // that will be an array
+
+// Example-4 Extract value from objects
+const personx = {
+    firstNamex: 'Farhan',
+    lastNamex: 'Arshad',
+    agex: 32
+}
+
+const { firstNamex, lastNamex, agex, jobx } = personx;  // vaiable name should be the same as properties name.
+// if any property is missing than value will be undefined if not default value assigned
+
+console.log(firstNamex);
+console.log(lastNamex);
+console.log(agex);
+console.log(jobx);
+
+// Example-5 destructuring In Function params.
+console.log('destructuring In Function params');
+function displayPerson({firstNamex, lastNamex, agex, jobx}) {
+    console.log(`FirstName: ${firstNamex}`);
+    console.log(`LastName: ${lastNamex}`);
+    console.log(`Age: ${agex}`);
+    console.log(`Job: ${jobx}`);
+}
+
+displayPerson(personx);
