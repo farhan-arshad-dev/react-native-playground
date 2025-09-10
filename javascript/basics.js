@@ -476,7 +476,7 @@ console.log(jobx);
 
 // Example-5 destructuring In Function params.
 console.log('destructuring In Function params');
-function displayPerson({firstNamex, lastNamex, agex, jobx}) {
+function displayPerson({ firstNamex, lastNamex, agex, jobx }) {
     console.log(`FirstName: ${firstNamex}`);
     console.log(`LastName: ${lastNamex}`);
     console.log(`Age: ${agex}`);
@@ -484,3 +484,47 @@ function displayPerson({firstNamex, lastNamex, agex, jobx}) {
 }
 
 displayPerson(personx);
+
+// Spread and REST operators in Javascript 
+
+// Challenges-1
+function sumOne(a, b) {
+    return a + b;
+}
+
+console.log(sumOne(5, 4)); // works well
+let myA = [5, 4];
+console.log(sumOne(myA)); // didn't work for the array same goes for object.
+
+// Solutions
+console.log("spread operator");
+console.log(sumOne(...myA)); // spread operator, take a group and spread into multiple values
+
+// Challenges-2 want to received my 1 OR more value. 
+
+// like in one function call give 3 number and in other function call 5 number are given
+console.log("Rest operator");
+// Rest operator get the individual values and make group in form of an array.
+function sumTwo(...args) {   // ...args(REST operator) can be any valiable name. and operates like an array
+    let sum = 0;
+    for (const arg of args) {
+        sum = sum + arg;
+    }
+    return sum;
+}
+
+console.log(sumTwo(3, 5));
+console.log(sumTwo(3, 5, 8, 9));
+console.log(sumTwo(myA));     // didn't work well, cuz Rest operator operator recieevd individual value
+console.log(sumTwo(...myA));
+
+function sumThree(a, b, ...args) {   // first 2 values should multiple, and reset will be use to calcualte the sum.
+    let mul = a * b;
+    let sum = 0;
+    for (const arg of args) {
+        sum = sum + arg;
+    }
+    return [mul, sum];
+}
+
+console.log(sumThree(3, 5, 2, 2));
