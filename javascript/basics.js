@@ -535,6 +535,8 @@ function sumThree(a, b, ...args) {   // first 2 values should multiple, and rese
 console.log(sumThree(3, 5, 2, 2));
 
 // Deep copy and Shallow Copy of the object
+// Shallow copy creates a new object but only copies the values of primitive types (like numbers and strings) and references to objects.
+// A deep copy creates a completely new and independent object, recursively duplicating all nested objects as well.
 // Probleam
 // Impure function that mutates the data
 const addToScroreHostory = (array, score) => {

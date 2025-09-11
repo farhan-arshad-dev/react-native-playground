@@ -235,7 +235,7 @@ mario.totaLives();
 console.log('Lexical Scope Solution');
 function startGame1() {
     this.lives = 1;
-    this.totaLives = ()=> {     // with arrow function the Lexical this will pass as a scope
+    this.totaLives = () => {     // with arrow function the Lexical this will pass as a scope
         console.log(this.lives);
         (() => {    // with arrow function the Lexical this will pass as a scope
             console.log('Lexical Scope Solution cont...');
