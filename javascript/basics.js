@@ -2,6 +2,13 @@ console.log("Hello World");
 console.error("This is an error");
 console.warn("This is a warning");
 
+//(Single Line commnets)
+
+/* 
+Multi line comments
+*/
+
+
 // var -> Global varibale (not recomendeed)
 // let -> Variable - ES6
 // const -> contatnt - ES6
@@ -30,7 +37,7 @@ console.log(overs);
 // Con't contain a space or hyphen (-)
 // Are case-sensitive
 
-// const should be initialized, Premitive Types
+// const should be initialized, Premitive Types (and contains Immutable)
 const name = 'Farhan';  // String Literal
 const age = 30;         // Number Literal
 const rating = 4.5;     // Number Literal
@@ -39,6 +46,8 @@ const x = null          // null is the value(explicitly clear the content), and 
 const y = undefined     // undefined both type and value
 
 let z;                  // by default variables type and values is `undefine`
+z = 0;
+z = 1;  // Reassignment is not the same as mutable
 
 console.log(typeof name);
 console.log(typeof age);
@@ -70,12 +79,7 @@ console.log(s.split('')); // split by chars
 const string = 'technology, computers, it, code';
 console.log(string.split(',')); // split by chars
 
-//(Single Line commnets)
-/* 
-Multi line comments
-*/
-
-// Reference Types Array, funcations, object.
+// Reference(Structural) Types Array, funcations, object. And Structural contains Mutable data (can change the value).
 // Arrays
 
 console.log("Reference Types");
@@ -84,12 +88,13 @@ const numbers = new Array(1, 2, 3, 4, 5);      // index 0-4, array using object
 console.log(numbers);
 
 // using liters, and can caontain multi type data, JS is not the staticly typed (dynamically types)
+// create an array using const doesn't make array immutable, can change the value, but can't reassign the array
 const fruits = ['apples', 'oranges', 'pearns', 10, true];
 console.log(typeof fruits);         // array is also the type of object
 console.log(fruits);
 console.log(fruits[1]);
 
-// arrays can manuplated the array (udpate the elements), but not reasign the array 
+// arrays can manuplated the array (udpate the elements), but not reasign the array
 // like 
 // fruits = [];
 fruits[5] = 'grapes'; // not the recomended way cuz will update the element is index is already exit.
@@ -528,3 +533,126 @@ function sumThree(a, b, ...args) {   // first 2 values should multiple, and rese
 }
 
 console.log(sumThree(3, 5, 2, 2));
+
+// Deep copy and Shallow Copy of the object
+// Probleam
+// Impure function that mutates the data
+const addToScroreHostory = (array, score) => {
+    array.push(score);
+    return array;
+}
+const scoreArray = [44, 23, 12];
+console.log(addToScroreHostory(scoreArray, 14));    // mutates the original array
+
+// More detial...
+console.log('Deep copy and Shallow Copy');
+const xArray = [44, 45, 60];
+const yArray = [...xArray];     // Shallow copy using the spread operator
+console.log(xArray === yArray);
+
+// can use Object.assign()
+const tArray = Object.assign([], yArray);
+console.log(tArray === yArray);
+tArray.push(11);
+console.log(yArray);
+console.log(tArray);
+
+// lets consider
+yArray.push([7, 8, 9]);
+const vArray = [...yArray];
+vArray[3].push(5);
+console.log(vArray);
+console.log(yArray);    // still update the nested array cuz share the ref of nested array.
+
+// same goes to object, even Object.freeze is a shallow freeze, cuz we can update the nested object.
+const scoreObj = {
+    first: 44,
+    second: 12,
+    third: { a: 1, b: 2 }
+}
+Object.freeze(scoreObj);
+scoreObj.third.a = 8;
+console.log("scoreObj.third.a =", scoreObj);
+
+// Deep copy need to avoide this
+// but Json parsing cuz of stringify losses the data types
+// also does't work for complex types like Dates, functions, undefined, Maps, Sets, FileList, ImageData, Regexps e.t.c
+const newScoreObj = JSON.parse(JSON.stringify(scoreObj));
+console.log(newScoreObj);
+console.log(scoreObj === newScoreObj);
+
+// Deep copy function
+const deepClone = (obj) => {
+    if (typeof obj !== 'object' || obj === null) return obj
+
+    // create an array or object to hold the values
+    const newObject = Array.isArray(obj) ? [] : {};
+
+    for (let key in obj) {
+        const value = obj[key];
+        // recursive call for the nested objects and arrays
+        newObject[key] = deepClone(value);
+    }
+    return newObject;
+}
+
+console.log('Deep copy funcation');
+const myScoreObj = deepClone(scoreArray);
+console.log(myScoreObj === scoreArray);
+myScoreObj.push(50);
+console.log('myScoreObj =', myScoreObj);
+console.log('scoreArray =', scoreArray);
+
+// Code Practice Question
+
+console.log('Code Practice Question');
+const user = { name: 'abc', address: { street: 'xyz' } }
+
+console.log('Copy ref');
+const refUser = user;
+refUser.name = 'Farhan';
+console.log(refUser === user);      // still the same cuz just copy the ref of the object
+
+console.log('Shallow copy');
+const shallowUser1 = { ...user };      // Shallow copy using spread operator
+const shallowUser2 = Object.assign({}, user);
+
+shallowUser1.name = 'Farhan';
+console.log(shallowUser1 === user);      // different objects
+shallowUser1.address.street = "abc";
+console.log(shallowUser1);
+console.log(user);  // but update the nested object cuz of shallow copy(means nested object OR array still shared the ref);
+
+shallowUser2.name = 'Arshad';
+console.log(shallowUser1 === user);      // different objects
+shallowUser1.address.street = "lmn";
+console.log(shallowUser1);
+console.log(user);  // but update the nested object cuz of shallow copy(means nested object OR array still shared the ref);
+
+console.log('Deep copy');
+
+const userX = { name: 'abc', address: { street: 'xyz' } }
+
+console.log('Deep copy Using JSON.stringify and JSON.parse');
+const deepUser1 = JSON.parse(JSON.stringify(userX));
+deepUser1.name = 'Farhan';
+console.log(deepUser1 === userX);      // different objects
+deepUser1.address.street = "abc";       // didn't effect original object
+console.log(deepUser1);
+console.log(userX);
+
+console.log('Deep copy Using structuredClone');
+const deepUser2 = structuredClone(userX);
+console.log(deepUser2 === userX);      // different objects
+deepUser2.address.street = "abc";       // didn't effect original object
+console.log(deepUser2);
+console.log(userX);
+
+console.log('Deep copy Using deepClone function defined above');
+const deepUser3 = deepClone(userX);
+console.log(deepUser3 === userX);      // different objects
+deepUser3.address.street = "abc";       // didn't effect original object
+console.log(deepUser3);
+console.log(userX);
+
+// Can use libraries for a deep copy function.
