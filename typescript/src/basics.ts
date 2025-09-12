@@ -27,6 +27,9 @@ console.log(`sId2 = ${typeof (sId2)}`);  // by default type is object
 sId2 = 2;
 console.log(`sId2 = ${typeof (sId2)}`);  // now type is number
 
+// Type annotations in TypeScript are a way to explicitly declare
+// the expected data type of variables, function parameters, and
+// function return values. Type annotations are written using a colon (:)
 let id: number = 5;
 console.log(`Id = ${id}`);
 
