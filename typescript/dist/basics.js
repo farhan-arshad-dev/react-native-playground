@@ -26,6 +26,12 @@ console.log(employee);
 let pId;
 pId = 5;
 pId = '5';
+function getBear() {
+    return { name: 'Baby Bear', honey: true };
+}
+const bear = getBear();
+bear.name;
+bear.honey;
 var Direction1;
 (function (Direction1) {
     Direction1[Direction1["Up"] = 0] = "Up";

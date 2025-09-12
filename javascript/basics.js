@@ -114,6 +114,10 @@ console.log(Array.isArray(fruits));
 console.log(Array.isArray('fruits'));
 
 console.log(fruits.indexOf('oranges'));
+let adcIndex = fruits.indexOf("abc");
+if (adcIndex !== -1) {
+    console.log('Item found');
+}
 
 // object literals
 const person = {
@@ -127,6 +131,7 @@ const person = {
         state: 'MA'
     }
 }
+
 console.log("Object Oriented Programming");
 console.log(person);
 
@@ -217,6 +222,7 @@ const todoCompletedText = todos.filter(function (todo) {
 }).map(function (todo) {
     return todo.text;
 });
+todoCompletedText = "diaflkjsdfh";
 console.log(todoCompletedText);
 
 
@@ -657,4 +663,42 @@ deepUser3.address.street = "abc";       // didn't effect original object
 console.log(deepUser3);
 console.log(userX);
 
-// Can use libraries for a deep copy function.
+// Deep copy using spread operator
+const personX = { ...person, hobbies: [...person.hobbies], addNumbers: { ...person.address } };
+
+//******* Can use libraries for a deep copy function.
+
+
+// Weekly 1-1 with Mentor.
+// Hoisting concept.
+// In JavaScript is a mechanism where variable and function
+// declarations are conceptually moved to the top of their containing
+// scope during the compilation phase, in short we can make a call of 
+// a variable OR a fucnction before the declaration.
+
+// Scope difference between var and let.
+for (var abc = 1; abc <= 5; abc++) {
+    setTimeout(() => {
+        console.log(abc);
+    }, abc * 1000);
+}
+
+// output, cuz abc will the same for each itration.
+// 6
+// 6
+// 6
+// 6
+// 6
+
+for (let abc = 1; abc <= 5; abc++) {
+    setTimeout(() => {
+        console.log(abc);
+    }, abc * 1000);
+}
+
+// output cuz abc instance will be create for each instance.
+// 1
+// 2
+// 3
+// 4
+// 5
