@@ -114,6 +114,10 @@ console.log(Array.isArray(fruits));
 console.log(Array.isArray('fruits'));
 
 console.log(fruits.indexOf('oranges'));
+let adcIndex = fruits.indexOf("abc");
+if (adcIndex !== -1) {
+    console.log('Item found');
+}
 
 // object literals
 const person = {
@@ -127,6 +131,7 @@ const person = {
         state: 'MA'
     }
 }
+
 console.log("Object Oriented Programming");
 console.log(person);
 
@@ -212,12 +217,16 @@ const todoCompleted = todos.filter(function (todo) {
 });
 console.log(todoCompleted);
 
-const todoCompletedText = todos.filter(function (todo) {
+let todoCompletedText = todos.filter(function (todo) {
     return todo.isCompleted == true;
 }).map(function (todo) {
     return todo.text;
 });
 console.log(todoCompletedText);
+todoCompletedText = "diaflkjsdfh";
+console.log(todoCompletedText);
+console.log(todos);
+
 
 
 //Equality Operators
@@ -505,7 +514,7 @@ console.log(sumOne(myA)); // didn't work for the array same goes for object.
 console.log("spread operator");
 console.log(sumOne(...myA)); // spread operator, take a group and spread into multiple values
 
-// Challenges-2 want to received my 1 OR more value. 
+// Challenges-2 want to recei2ved my 1 OR more value. 
 
 // like in one function call give 3 number and in other function call 5 number are given
 console.log("Rest operator");
@@ -579,7 +588,7 @@ console.log("scoreObj.third.a =", scoreObj);
 // Deep copy need to avoide this
 // but Json parsing cuz of stringify losses the data types
 // also does't work for complex types like Dates, functions, undefined, Maps, Sets, FileList, ImageData, Regexps e.t.c
-const newScoreObj = JSON.parse(JSON.stringify(scoreObj));
+const newScoreObj = JSON.parse(JSON.stringify(scoreObj));   // only works with premitive types.
 console.log(newScoreObj);
 console.log(scoreObj === newScoreObj);
 
@@ -657,4 +666,51 @@ deepUser3.address.street = "abc";       // didn't effect original object
 console.log(deepUser3);
 console.log(userX);
 
-// Can use libraries for a deep copy function.
+// Deep copy using spread operator
+const personX = { ...person, hobbies: [...person.hobbies], addNumbers: { ...person.address } };
+
+//******* Can use libraries for a deep copy function.
+
+
+console.log('Weekly 1-1 with Mentor Queries');
+// Weekly 1-1 with Mentor.
+// Hoisting concept.
+// In JavaScript is a mechanism where variable and function
+// declarations are conceptually moved to the top of their containing
+// scope during the compilation phase, in short we can make a call of 
+// a variable OR a fucnction before the declaration.
+
+// Scope difference between var and let.
+for (var abc = 1; abc <= 5; abc++) {
+    setTimeout(() => {
+        console.log(abc);
+    }, abc * 1000);
+}
+
+// output, cuz abc will the same for each itration.
+// 6
+// 6
+// 6
+// 6
+// 6
+
+for (let abc = 1; abc <= 5; abc++) {
+    setTimeout(() => {
+        console.log(abc);
+    }, abc * 1000);
+}
+
+// output cuz abc instance will be create for each instance.
+// 1
+// 2
+// 3
+// 4
+// 5
+
+// Code output
+console.log('a');
+setTimeout(() => {  // cuz setTimeout is asynchronous.
+    console.log('b');
+}, 0);
+console.log('c');
+

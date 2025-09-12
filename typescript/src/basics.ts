@@ -27,6 +27,9 @@ console.log(`sId2 = ${typeof (sId2)}`);  // by default type is object
 sId2 = 2;
 console.log(`sId2 = ${typeof (sId2)}`);  // now type is number
 
+// Type annotations in TypeScript are a way to explicitly declare
+// the expected data type of variables, function parameters, and
+// function return values. Type annotations are written using a colon (:)
 let id: number = 5;
 console.log(`Id = ${id}`);
 
@@ -61,9 +64,27 @@ employee = [
 console.log(employee);
 
 // Union a variable to hold a the value of multiple types.
-let pId: number | string;
+let pId: number | string;   // union
 pId = 5;    // true statment
 pId = '5';  // true statment
+
+// Intersection types allow for combining multiple types into a single, cohesive type.
+// Extending a type via intersections
+type Animal = {
+    name: string;
+}
+
+type Bear = Animal & {
+    honey: boolean;
+}
+
+function getBear(): Bear {
+    return { name: 'Baby Bear', honey: true };
+}
+
+const bear = getBear();
+bear.name;
+bear.honey;
 
 // Enum to define the named constat numaric OR string
 enum Direction1 {
@@ -86,11 +107,21 @@ enum Direction2 {
 console.log(Direction2.Up);     // will show the string value
 console.log(Direction2);
 
-// Object / Custome type
+// Object / Custome type / Type Aliases
+// This enhances code readability, simplifies complex type definitions,
+// and promotes reusability of types across a project.
+// type UserID = string; // Alias for a primitive type
+// type Coordinates = { x: number; y: number; }; // Alias for an object type
+// type Status = "active" | "inactive" | "pending"; // Alias for a union type
+// type GreeterFunction = (name: string) => string; // Alias for a function type
+
 type User = {
     id: number,
     name: string,
 }
+
+// use a type alias to give a name to any type
+type ID = number | string;
 
 const user: User = {
     id: 1,
@@ -136,7 +167,7 @@ const user1: UserInterface = {
 
 // user1.id = 5;   // false statement
 
-// interface function
+// Interface function
 interface MathFun {
     (x: number, y: number): number;
 }
@@ -154,6 +185,7 @@ interface PersonInterface {
     name: string;
     register(): string;
 }
+
 class Person implements PersonInterface {
     id: number;     // public by default until defined
     name: string;   // should be defined cuz define in Interface
