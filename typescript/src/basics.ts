@@ -24,8 +24,10 @@ console.log(`sId1 = ${typeof (sId1)}`);
 
 let sId2 = null;
 console.log(`sId2 = ${typeof (sId2)}`);  // by default type is object
-sId2 = 2;
+sId2 = 2;   // inferred as number  (Type inference)
 console.log(`sId2 = ${typeof (sId2)}`);  // now type is number
+
+let sId3 = "Farhan"     // inferred as string (Type inference)
 
 // Type annotations in TypeScript are a way to explicitly declare
 // the expected data type of variables, function parameters, and
@@ -138,7 +140,7 @@ let customerId1 = cid as number // other way
 // customerId1 = '1';      // not possible
 
 // Functions with the return types
-function addNum(x: number, y: number): number {
+function addNum(x: number, y: number): number {     // explicit typing manually specify the type.
     return x + y;
 }
 
@@ -234,3 +236,221 @@ let stringArray = getArray<string>(['a', 'b', 'c']);
 
 // numArray.push('1'); // not possible
 stringArray.push('d');  // true statment
+
+// Utility types (Partial, Pick, Omit, Record, Keyof)
+
+// Partial
+type UserX = {
+    firstName: string,
+    lastName: string,
+    age: number,
+    email: string,
+    phone: number | string,
+    id: number,
+    password: string
+}
+
+// Probleam if we need to assign some value in the define type, didn't allow. so declare as partial
+// let user1: UserX = {
+//     firstName: 'farhan'
+// }
+
+let user2: Partial<UserX> = {   // Partial make unsed properties to optional like `?` do.
+    firstName: 'Farhan',
+    lastName: 'Arshad'
+};
+
+// Pick type(Pick<data_type, key) used to reuse some roperties in other object e.g
+// Also any chage in UserX type will refelect in Team type, e.g data type change of any property
+
+type Team = {
+    id: string,
+    name: string,
+    membaers: Array<Pick<UserX, 'firstName' | 'lastName' | 'phone'>>;
+};
+type PickUserX = Pick<UserX, 'firstName' | 'lastName' | 'phone'>
+
+// Omit type(Moit<data_type, key) oposite the Pick type (omit some properties don;'t want to use)
+
+type Team1 = {
+    id: string,
+    name: string,
+    membaers: Array<Omit<UserX, 'is' | 'pasword'>>;
+};
+
+type OmitUserX = Omit<UserX, 'id' | 'password'>
+
+// Record type(Record<keys_data_type, value_data_type>), used to restrict the keys datatype and values datatype for an object
+
+type Foordorder = Record<number, string>
+
+let foodOrder: Foordorder = {
+    1: 'apple',
+    2: 'oranges',
+    3: 'banna',
+    // "mango": 1  // not possible
+}
+
+// same for custom types
+type City = 'Lahore' | 'Multan' | 'Islamabad'
+type ScoreType = {
+    population: number,
+    score: number
+};
+
+type CityScore = Record<City, ScoreType>
+
+let cityScore: Partial<CityScore> = {
+    Lahore: {
+        population: 1,
+        score: 1
+    },
+    Multan: {
+        population: 2,
+        score: 2
+    }
+
+    // Dera: {  // not possble cuz Dera key doesn't exist
+    //     population: 2,
+    //     score: 2
+    // }
+}
+
+// keyof => Produces a union type of its keys. This union type will consist
+// of string literal types or number literal types, representing the names
+// of the properties within that object type.
+
+// Consider the object and want to reuse the keys
+let cities = {
+    multan: { area: 25 },
+    lahore: { area: 25 },
+    islamabad: { area: 25 },
+    pindi: { area: 25 },
+}
+
+type CitiesType = typeof cities;
+type CityX = keyof CitiesType;  // CityX now contains all key of cities ('multan' | 'lahore' | 'islamabad' | 'pindi')
+
+type CityXScore = Record<CityX, ScoreType>
+
+let cityXScore: Partial<CityXScore> = {
+    lahore: {
+        population: 1,
+        score: 1
+    },
+    multan: {
+        population: 2,
+        score: 2
+    }
+
+    // dera: {  // not possble cuz Dera key doesn't exist
+    //     population: 2,
+    //     score: 2
+    // }
+}
+
+// Type narrowing type guards (in, instanceof, typeof)
+// Type narrowing is the concept to a broad or union type of a variable
+// is refined to a more specific type within a certain scope,
+// usually after a runtime check
+console.log('Type narrowing');
+// typeof guard
+function getPostion(position: number | string) {        // union
+    if (typeof position === 'string') {     // norrow down to check the specific type to only string
+        console.log(position.split(" "));
+    } else {
+        console.log(position);
+    }
+}
+
+// in guard
+type Student = { study: () => {} };
+type EmployeeX = { work: () => {} };
+
+function activity(actor: Student | EmployeeX) {
+    if ('study' in actor) {     // check the availbility of the property.
+        return actor.study();
+    } else {
+        return actor.work();
+    }
+}
+
+// instanceof   => h is the instance of ''Human' if and only if, the prototype chian of h contains Human.prototype
+// 'instanceof' expression must be of type 'any', an object type or a type parameter.
+class StudentX {
+    name = "abc";
+}
+let studentX = new StudentX();
+console.log(studentX instanceof StudentX);
+
+// Modules & namespaces
+// Module => is any file that has at least one import or export. 
+// let you split code into multiple files and use import/export to share things between them.
+
+// Namespaces => Namespace is a TypeScript-specific way of organizing code inside a single file.
+// It uses the namespace keyword to wrap related functions, classes, or interfaces under one name.
+// Helps avoid global name collisions in large scripts.
+
+// Modules is already covered in JavaScript
+
+// Namespaces   => Replaced by modules in modern TypeScript/JavaScript.
+namespace MathUtils {
+    export function add(a: number, b: number): number {     // without export keyword unable to use in other files.
+        return a + b;
+    }
+
+    export function subtract(a: number, b: number): number {
+        return a - b;
+    }
+}
+
+// Usage
+console.log(MathUtils.add(10, 5)); // 15
+
+// Declaration Merging
+// Can Declare same name class|interface at different place and typescript compliler treat
+// all the declaration together and treated as single one. e.g
+console.log('Declaration Merging')
+
+// Interface declaration
+interface BankAccount {
+    accountNumber: number;
+    accountName: string,
+
+    debit: (amount: number) => void // same goes for methods.
+}
+
+interface BankAccount { // allow to declare the same name interface.
+    accountNumber: number;  // duplication is just ignored
+    accountBalance: number;
+    credit: (amount: number) => void
+}
+
+let acc1: BankAccount = {
+    accountNumber: 123,
+    accountName: "Current",
+    accountBalance: 123,
+
+    debit(amount: number): void {
+
+    },
+
+    credit(amount: number): void {
+
+    }
+}
+
+// Enum Merging
+enum ErrorCode {
+    ARRAY,
+    CLASS,
+}
+
+enum ErrorCode {    // in that case we need to define the index. cuz first declaration have 0 and 1 index by default
+    INDEX = 2,
+}
+
+console.log(ErrorCode.ARRAY);
+console.log(ErrorCode.CLASS);
+console.log(ErrorCode.INDEX);
+

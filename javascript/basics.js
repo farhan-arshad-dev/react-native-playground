@@ -42,7 +42,7 @@ const name = 'Farhan';  // String Literal
 const age = 30;         // Number Literal
 const rating = 4.5;     // Number Literal
 const isCool = true;    // Boolean Literal
-const x = null          // null is the value(explicitly clear the content), and object is te type
+const x = null          // null is the value(explicitly clear the content), and object is type
 const y = undefined     // undefined both type and value
 
 let z;                  // by default variables type and values is `undefine`

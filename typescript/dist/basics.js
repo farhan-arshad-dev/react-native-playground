@@ -6,6 +6,7 @@ let sId2 = null;
 console.log(`sId2 = ${typeof (sId2)}`);
 sId2 = 2;
 console.log(`sId2 = ${typeof (sId2)}`);
+let sId3 = "Farhan";
 let id = 5;
 console.log(`Id = ${id}`);
 let id1 = 5;
@@ -110,5 +111,95 @@ function getArray(items) {
 let numArray = getArray([1, 2, 3, 4]);
 let stringArray = getArray(['a', 'b', 'c']);
 stringArray.push('d');
+let user2 = {
+    firstName: 'Farhan',
+    lastName: 'Arshad'
+};
+let foodOrder = {
+    1: 'apple',
+    2: 'oranges',
+    3: 'banna',
+};
+let cityScore = {
+    Lahore: {
+        population: 1,
+        score: 1
+    },
+    Multan: {
+        population: 2,
+        score: 2
+    }
+};
+let cities = {
+    multan: { area: 25 },
+    lahore: { area: 25 },
+    islamabad: { area: 25 },
+    pindi: { area: 25 },
+};
+let cityXScore = {
+    lahore: {
+        population: 1,
+        score: 1
+    },
+    multan: {
+        population: 2,
+        score: 2
+    }
+};
+console.log('Type narrowing');
+function getPostion(position) {
+    if (typeof position === 'string') {
+        console.log(position.split(" "));
+    }
+    else {
+        console.log(position);
+    }
+}
+function activity(actor) {
+    if ('study' in actor) {
+        return actor.study();
+    }
+    else {
+        return actor.work();
+    }
+}
+class StudentX {
+    name = "abc";
+}
+let studentX = new StudentX();
+console.log(studentX instanceof StudentX);
+var MathUtils;
+(function (MathUtils) {
+    function add(a, b) {
+        return a + b;
+    }
+    MathUtils.add = add;
+    function subtract(a, b) {
+        return a - b;
+    }
+    MathUtils.subtract = subtract;
+})(MathUtils || (MathUtils = {}));
+console.log(MathUtils.add(10, 5));
+console.log('Declaration Merging');
+let acc1 = {
+    accountNumber: 123,
+    accountName: "Current",
+    accountBalance: 123,
+    debit(amount) {
+    },
+    credit(amount) {
+    }
+};
+var ErrorCode;
+(function (ErrorCode) {
+    ErrorCode[ErrorCode["ARRAY"] = 0] = "ARRAY";
+    ErrorCode[ErrorCode["CLASS"] = 1] = "CLASS";
+})(ErrorCode || (ErrorCode = {}));
+(function (ErrorCode) {
+    ErrorCode[ErrorCode["INDEX"] = 2] = "INDEX";
+})(ErrorCode || (ErrorCode = {}));
+console.log(ErrorCode.ARRAY);
+console.log(ErrorCode.CLASS);
+console.log(ErrorCode.INDEX);
 export {};
 //# sourceMappingURL=basics.js.map
