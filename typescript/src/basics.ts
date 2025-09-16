@@ -454,3 +454,13 @@ console.log(ErrorCode.ARRAY);
 console.log(ErrorCode.CLASS);
 console.log(ErrorCode.INDEX);
 
+// Ambient Types => type declarations that describe the shape of existing code
+// (usually JS or external APIs) without providing an implementation.
+// They live in .d.ts (declaration files).
+// Think of them as “type-only contracts” — they tell the TypeScript compiler
+// what exists, but don’t generate any JavaScript code.
+console.log('Ambient Types');
+
+// Just declare without Implementation 
+declare const VERSION: string;  // No JavaScript will be emitted for the declare — it’s only for type-checking.
+console.log(VERSION); // TypeScript knows it's a string

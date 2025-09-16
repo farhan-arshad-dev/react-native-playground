@@ -201,5 +201,7 @@ var ErrorCode;
 console.log(ErrorCode.ARRAY);
 console.log(ErrorCode.CLASS);
 console.log(ErrorCode.INDEX);
+console.log('Ambient Types');
+console.log(VERSION);
 export {};
 //# sourceMappingURL=basics.js.map
