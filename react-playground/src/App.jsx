@@ -1,5 +1,6 @@
 import { Intro } from "./Intro.jsx";
 import { Profile } from "./Profile.jsx";
+import { Bio } from "./Bio.jsx";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
     <>
       <Intro />
       <Profile />
+      <Bio />
     </>
   )
 }
