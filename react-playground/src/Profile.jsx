@@ -1,8 +1,13 @@
-export function Profile() {
+// props will be received as a object that way need to use {} / OR can use directly the object name like props
+// destructuring syntax
+export function Profile({ person, size = 100 }) {   // its a JSX function
     return (
         <img
-            src="https://i.imgur.com/MK3eW3Am.jpg"
-            alt="Katherine Johnson"
+            className="avatar"
+            src={person.imageUrl}
+            alt={person.name}
+            width={size}
+            height={size}
         />
     )
 }
