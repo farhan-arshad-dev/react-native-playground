@@ -3,6 +3,7 @@ import { Profile } from "./Profile.jsx";
 import { Bio } from "./Bio.jsx";
 import PackingList from "./Conditional.jsx";
 import List, { Poem, ShowChemistList, ShowChemistListBullets } from "./RenderingLists.jsx";
+import TeaSet, { TeaGatheringPure } from "./PureComponents.jsx";
 
 function App() {
   return (
@@ -27,6 +28,12 @@ function App() {
       <ShowChemistListBullets />
       <ShowChemistList />
       <Poem />
+      
+      <h1>Im-Pure Function</h1>
+      <TeaSet />
+
+      <h1>Pure Function & local mutation</h1>
+      <TeaGatheringPure />
     </>
   )
 }
