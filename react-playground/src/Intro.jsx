@@ -1,4 +1,4 @@
-import { Profile } from "./Profile.jsx"
+import Profile from "./Profile.jsx"
 
 const today = new Date();
 
@@ -38,7 +38,7 @@ function Card({ children }) {       // here children prop is reserved to accept 
     );
 }
 
-export function Intro() {
+export default function Intro() {
     const person = {
         name: "Katherine Johnson",
         imageUrl: "https://i.imgur.com/cAnAEB8.jpeg"

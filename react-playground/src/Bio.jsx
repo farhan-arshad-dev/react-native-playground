@@ -12,7 +12,7 @@
 //   );
 // }
 
-export function Bio() {
+export default function Bio() {
     return (
         <>
             <div className="intro">

@@ -1,9 +1,10 @@
-import { Intro } from "./Intro.jsx";
-import { Profile } from "./Profile.jsx";
-import { Bio } from "./Bio.jsx";
+import Intro from "./Intro.jsx";
+import Profile from "./Profile.jsx";
+import Bio from "./Bio.jsx";
 import PackingList from "./Conditional.jsx";
 import List, { Poem, ShowChemistList, ShowChemistListBullets } from "./RenderingLists.jsx";
 import TeaSet, { TeaGatheringPure } from "./PureComponents.jsx";
+import InteractiveEvents, { Counter, Form, Gallery, Signup, ToolbarEvent } from "./Interactivity.jsx";
 
 function App() {
   return (
@@ -28,12 +29,26 @@ function App() {
       <ShowChemistListBullets />
       <ShowChemistList />
       <Poem />
-      
+
       <h1>Im-Pure Function</h1>
       <TeaSet />
 
       <h1>Pure Function & local mutation</h1>
       <TeaGatheringPure />
+
+      <h1>Adding Interactivity</h1>
+      <InteractiveEvents />
+
+      <h1>State: a component’s memory</h1>
+      <Gallery />
+      <br />
+      <Form />
+      <br />
+      <Counter />
+      <br />
+      <ToolbarEvent />
+      <br />
+      <Signup />
     </>
   )
 }

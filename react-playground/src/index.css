@@ -13,3 +13,12 @@
     border-radius: 20px;
     background: #fff;
 }
+
+.action-button {
+    margin: 10px;
+}
+
+.toolbar {
+    background: #aaa;
+    padding: 5px;
+}

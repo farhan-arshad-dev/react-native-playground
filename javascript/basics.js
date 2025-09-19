@@ -512,13 +512,13 @@ console.log(sumOne(myA)); // didn't work for the array same goes for object.
 
 // Solutions
 console.log("spread operator");
-console.log(sumOne(...myA)); // spread operator, take a group and spread into multiple values
+console.log(sumOne(...myA)); // spread operator, take a group and spread into multiple values (Like unpack the values.)
 
-// Challenges-2 want to recei2ved my 1 OR more value. 
+// Challenges-2 want to received my 1 OR more value. 
 
 // like in one function call give 3 number and in other function call 5 number are given
 console.log("Rest operator");
-// Rest operator get the individual values and make group in form of an array.
+// Rest operator get the individual values and make group in form of an array.  (Like pack the values into one)
 function sumTwo(...args) {   // ...args(REST operator) can be any valiable name. and operates like an array
     let sum = 0;
     for (const arg of args) {
