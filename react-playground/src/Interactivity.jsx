@@ -324,4 +324,10 @@ export function FormFillX() {
     );
 }
 
+// Updating Objects in State using 
+// Immer is a popular library that lets you write using the convenient
+// but mutating syntax and takes care of producing the copies for you. 
 
+// updatePerson(draft => {
+//  draft.artwork.city = 'Lagos';
+// });
