@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { sculptureList } from './data';
+import { useImmer } from 'use-immer';
+import AddTodo from './AddTodo.jsx';
+import TaskList from './TaskList.jsx';
 
 export default function InteractiveEvents() {
     return (
@@ -326,8 +329,145 @@ export function FormFillX() {
 
 // Updating Objects in State using 
 // Immer is a popular library that lets you write using the convenient
-// but mutating syntax and takes care of producing the copies for you. 
+// but mutating syntax and takes care of producing the copies for you.
+// Immer is a great way to keep the update handlers concise, especially
+// if there’s nesting in your state, and copying objects leads to repetitive code.
 
 // updatePerson(draft => {
 //  draft.artwork.city = 'Lagos';
 // });
+
+export function FormFillY() {
+    const [person, updatePerson] = useImmer({
+        name: 'Niki de Saint Phalle',
+        artwork: {
+            title: 'Blue Nana',
+            city: 'Hamburg',
+            image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+        }
+    });
+
+    function handleNameChange(e) {
+        updatePerson(draft => {
+            draft.name = e.target.value;    // mutating a special draft object provided by Immer.
+        });
+    }
+
+    function handleTitleChange(e) {
+        updatePerson(draft => {
+            draft.artwork.title = e.target.value;
+        });
+    }
+
+    function handleCityChange(e) {
+        updatePerson(draft => {
+            draft.artwork.city = e.target.value;
+        });
+    }
+
+    function handleImageChange(e) {
+        updatePerson(draft => {
+            draft.artwork.image = e.target.value;
+        });
+    }
+
+    return (
+        <>
+            <h1>Write concise update logic with Immer</h1>
+            <label>
+                Name:
+                <input
+                    value={person.name}
+                    onChange={handleNameChange}
+                />
+            </label>
+            <label>
+                Title:
+                <input
+                    value={person.artwork.title}
+                    onChange={handleTitleChange}
+                />
+            </label>
+            <label>
+                City:
+                <input
+                    value={person.artwork.city}
+                    onChange={handleCityChange}
+                />
+            </label>
+            <label>
+                Image:
+                <input
+                    value={person.artwork.image}
+                    onChange={handleImageChange}
+                />
+            </label>
+            <p>
+                <i>{person.artwork.title}</i>
+                {' by '}
+                {person.name}
+                <br />
+                (located in {person.artwork.city})
+            </p>
+            <img
+                src={person.artwork.image}
+                alt={person.artwork.title}
+            />
+        </>
+    );
+}
+
+// Updating Arrays in State
+let nextId = 3;
+const initialTodos = [
+    { id: 0, title: 'Buy milk', done: true },
+    { id: 1, title: 'Eat tacos', done: false },
+    { id: 2, title: 'Brew tea', done: false },
+];
+
+export function TaskApp() {
+    const [todos, setTodos] = useState(
+        initialTodos
+    );
+
+    function handleAddTodo(title) {
+        setTodos([
+            ...todos,
+            {
+                id: nextId++,
+                title: title,
+                done: false
+            }
+        ]);
+    }
+
+    function handleChangeTodo(nextTodo) {
+        setTodos(todos.map(t => {
+            if (t.id === nextTodo.id) {
+                return nextTodo;
+            } else {
+                return t;
+            }
+        }));
+    }
+
+    function handleDeleteTodo(todoId) {
+        setTodos(
+            todos.filter(t => t.id !== todoId)
+        );
+    }
+
+    return (
+        <>
+            <AddTodo
+                onAddTodo={handleAddTodo}
+            />
+            <TaskList
+                todos={todos}
+                onChangeTodo={handleChangeTodo}
+                onDeleteTodo={handleDeleteTodo}
+            />
+        </>
+    );
+}
+

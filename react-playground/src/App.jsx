@@ -4,7 +4,7 @@ import Bio from "./Bio.jsx";
 import PackingList from "./Conditional.jsx";
 import List, { Poem, ShowChemistList, ShowChemistListBullets } from "./RenderingLists.jsx";
 import TeaSet, { TeaGatheringPure } from "./PureComponents.jsx";
-import InteractiveEvents, { Counter, Form, FormFill, FormFillX, Gallery, Signup, ToolbarEvent } from "./Interactivity.jsx";
+import InteractiveEvents, { Counter, Form, FormFill, FormFillX, FormFillY, Gallery, Signup, TaskApp, ToolbarEvent } from "./Interactivity.jsx";
 
 function App() {
   return (
@@ -51,7 +51,13 @@ function App() {
       <Signup />
       <br />
       <FormFill />
+      <br />
       <FormFillX />
+      <br />
+      <FormFillY />
+      <br />
+      <br />
+      <TaskApp />
     </>
   )
 }
