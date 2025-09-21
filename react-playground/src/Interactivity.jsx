@@ -142,10 +142,13 @@ export function Counter() {
     const [score, setScore] = useState(0);
 
     function increment() {
-        // setScore(score + 1);    // didn't update the state variable instantly triggers a re-render
-        // fix => uses latest state value (safe for multiple updates).
-        setScore(s => s + 1)    // Functional Update: pass a function React gives that function the latest state value
+        // setScore(score + 1);    // didn't update the state variable instantly triggers a re-render/
+        // fix => uses latest state value (safe for multiple updates => Updater function).
+        // React adds that function to its queue
+        // Functional Update where `s` is paramter and get previously set value.
+        // pass a function React gives that function the latest state value
         // This ensures each update uses the most recent state, even if multiple updates are queued.
+        setScore(s => s + 1)
     }
 
     return (
@@ -208,3 +211,117 @@ export function Signup() {
         </form>
     );
 }
+
+// Updating Objects in State
+export function FormFill() {
+    const [person, setPerson] = useState({
+        firstName: 'Barbara',
+        lastName: 'Hepworth',
+        email: 'bhepworth@sculpture.com'
+    });
+
+    function handleFirstNameChange(e) {
+        setPerson({
+            ...person,  // shallow copy cuz only copies things one level deep
+            firstName: e.target.value
+        });
+    }
+
+    function handleLastNameChange(e) {
+        setPerson({
+            ...person,
+            lastName: e.target.value
+        });
+    }
+
+    function handleEmailChange(e) {
+        setPerson({
+            ...person,
+            email: e.target.value
+        });
+    }
+
+    return (
+        <>
+            <label>
+                First name:
+                <input
+                    value={person.firstName}
+                    onChange={handleFirstNameChange}
+                />
+            </label>
+            <label>
+                Last name:
+                <input
+                    value={person.lastName}
+                    onChange={handleLastNameChange}
+                />
+            </label>
+            <label>
+                Email:
+                <input
+                    value={person.email}
+                    onChange={handleEmailChange}
+                />
+            </label>
+            <p>
+                {person.firstName}{' '}
+                {person.lastName}{' '}
+                ({person.email})
+            </p>
+        </>
+    );
+}
+
+// Using a single event handler for multiple fields
+export function FormFillX() {
+    const [person, setPerson] = useState({
+        firstName: 'Barbara',
+        lastName: 'Hepworth',
+        email: 'bhepworth@sculpture.com'
+    });
+
+    function handleChange(e) {
+        setPerson({
+            ...person,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    return (
+        <>
+            <h1>Using a single event handler for multiple fields</h1>
+            <label>
+                First name:
+                <input
+                    name="firstName"    // mendatory and should be same as property name.
+                    value={person.firstName}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Last name:
+                <input
+                    name="lastName"
+                    value={person.lastName}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Email:
+                <input
+                    name="email"
+                    value={person.email}
+                    onChange={handleChange}
+                />
+            </label>
+            <p>
+                {person.firstName}{' '}
+                {person.lastName}{' '}
+                ({person.email})
+            </p>
+        </>
+    );
+}
+
+
