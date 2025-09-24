@@ -29,3 +29,7 @@ export const sculptureList = [{
     url: 'https://i.imgur.com/Sd1AgUOm.jpg',
     alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
 }];
+
+import { createContext } from 'react';
+
+export const LevelContext = createContext(1);

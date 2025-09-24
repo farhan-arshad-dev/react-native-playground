@@ -5,6 +5,8 @@ import PackingList from "./Conditional.jsx";
 import List, { Poem, ShowChemistList, ShowChemistListBullets } from "./RenderingLists.jsx";
 import TeaSet, { TeaGatheringPure } from "./PureComponents.jsx";
 import InteractiveEvents, { Counter, Form, FormFill, FormFillX, FormFillY, Gallery, Signup, TaskApp, ToolbarEvent } from "./Interactivity.jsx";
+import InputForm from "./InputWithState.jsx";
+import PageContext from "./PassingDataUseContext.jsx";
 
 function App() {
   return (
@@ -58,6 +60,14 @@ function App() {
       <br />
       <br />
       <TaskApp />
+
+      <br />
+      <br />
+      <InputForm />
+
+      <br />
+      <br />
+      <PageContext />
     </>
   )
 }
