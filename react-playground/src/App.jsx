@@ -7,6 +7,8 @@ import TeaSet, { TeaGatheringPure } from "./PureComponents.jsx";
 import InteractiveEvents, { Counter, Form, FormFill, FormFillX, FormFillY, Gallery, Signup, TaskApp, ToolbarEvent } from "./Interactivity.jsx";
 import InputForm from "./InputWithState.jsx";
 import PageContext from "./PassingDataUseContext.jsx";
+import TaskAppReducerContext from "./ReducerWithContext.jsx";
+import Chat, { VideoPlayer } from "./UseReference.jsx";
 
 function App() {
   return (
@@ -68,6 +70,16 @@ function App() {
       <br />
       <br />
       <PageContext />
+
+      <br />
+      <TaskAppReducerContext />
+
+      <br />
+      <Chat />
+
+      <br />
+      <br />
+      <VideoPlayer />
     </>
   )
 }
