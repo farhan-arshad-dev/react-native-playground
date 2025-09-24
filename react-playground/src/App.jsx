@@ -9,6 +9,8 @@ import InputForm from "./InputWithState.jsx";
 import PageContext from "./PassingDataUseContext.jsx";
 import TaskAppReducerContext from "./ReducerWithContext.jsx";
 import Chat, { VideoPlayer } from "./UseReference.jsx";
+import { UseEffectPlayground, VideoPlayerApp } from "./Effects.jsx";
+import MemoApp from "./UseMemo.jsx";
 
 function App() {
   return (
@@ -80,6 +82,16 @@ function App() {
       <br />
       <br />
       <VideoPlayer />
+      <br />
+      <br />
+      <VideoPlayerApp />
+
+      <br />
+      <br />
+      <UseEffectPlayground />
+      <br />
+      <br />
+      <MemoApp />
     </>
   )
 }
