@@ -1,18 +1,15 @@
-import { Link } from "expo-router";
+import { useAuth } from "@/lib/auth-context";
 import { StyleSheet, Text, View } from "react-native";
+import { Button } from "react-native-paper";
 
 export default function Index() {
+  const { signOut } = useAuth();
   return (
     <View
       style={styles.homePage}
     >
       <Text>Hello World!</Text>
-
-      {/* Web Scentric way to navigation a screen, Show the file name in href cuz of file base router.
-          Login Should be defined as Stack.Screen in _layout.tsx. and onClick of the Link navigation to the
-          login page.
-      */}
-      <Link href="/login" style={styles.navButton}>Login Page</Link>
+      <Button mode="text" onPress={signOut} icon={"logout"}>Sign Out</Button>
     </View>
   );
 }

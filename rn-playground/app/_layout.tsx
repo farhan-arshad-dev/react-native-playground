@@ -1,24 +1,20 @@
-import { Stack, useRouter } from "expo-router";
+import { AuthProvider, useAuth } from "@/lib/auth-context";
+import { Stack, useRouter, useSegments } from "expo-router";
 import React, { useEffect } from "react";
-import { Platform } from "react-native";
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const isAuth = false;
+  const { user, isLoadingUser } = useAuth();
+  const segments = useSegments();   // helps to access the info in which screen user is.
 
   useEffect(() => { // run after the react render commit the change to the DOM.
-    if (!isAuth) {
-      const authPage = () => {
-        router.replace("/auth");
-      }
-      // Ref: https://github.com/expo/router/issues/740#issuecomment-1629471113
-      if (Platform.OS === "ios") {
-        setTimeout(authPage, 1)
-      } else {
-        setImmediate(authPage);
-      }
+    const inAuthGroup = segments[0] === "auth";
+    if (!user && !inAuthGroup && !isLoadingUser) {
+      router.replace("/auth");
+    } else if (user && inAuthGroup && !isLoadingUser) {
+      router.replace("/");  // redirect to the home page.
     }
-  });
+  }, [user, segments]); // only run effect on change of user OR segments
 
   return <>{children}</>;
 }
@@ -28,11 +24,13 @@ function RouteGuard({ children }: { children: React.ReactNode }) {
 // which is a common and fundamental navigation pattern used in mobile applications.
 export default function RootLayout() {
   return (
-    <RouteGuard>
-      <Stack >
-        {/* don't want to show the header (toolbar) */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </RouteGuard>
+    <AuthProvider>
+      <RouteGuard>
+        <Stack >
+          {/* don't want to show the header (toolbar) */}
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </RouteGuard>
+    </AuthProvider>
   );
 }

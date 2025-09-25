@@ -25,7 +25,8 @@ function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext value={tasks}>
+    // the context object (container that holds Provider + Consumer).
+    <TasksContext value={tasks}>  
       <TasksDispatchContext value={dispatch}>
         {children}
       </TasksDispatchContext>
