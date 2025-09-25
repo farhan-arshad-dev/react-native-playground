@@ -1,5 +1,6 @@
 import { Stack, useRouter } from "expo-router";
 import React, { useEffect } from "react";
+import { Platform } from "react-native";
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -7,7 +8,15 @@ function RouteGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => { // run after the react render commit the change to the DOM.
     if (!isAuth) {
-      router.replace("/auth");
+      const authPage = () => {
+        router.replace("/auth");
+      }
+      // Ref: https://github.com/expo/router/issues/740#issuecomment-1629471113
+      if (Platform.OS === "ios") {
+        setTimeout(authPage, 1)
+      } else {
+        setImmediate(authPage);
+      }
     }
   });
 
