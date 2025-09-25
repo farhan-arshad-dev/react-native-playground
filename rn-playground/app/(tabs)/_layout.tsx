@@ -1,29 +1,45 @@
 import { Tabs } from "expo-router";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // This file is used to define the Tabs screens.
 // Refers to the concept of Stack Navigation using tab.
 export default function TabsLayout() {
-  return <Tabs screenOptions={{ tabBarActiveTintColor: "coral" }}>
+  return <Tabs
+    screenOptions={{
+      headerStyle: { backgroundColor: "#f5f5f5" },
+      headerShadowVisible: false,
+      tabBarStyle: {
+        backgroundColor: "#f5f5f5",
+        borderWidth: 0,
+        elevation: 0,
+        shadowOpacity: 0
+      },
+      tabBarActiveTintColor: "#6200ee",
+      tabBarInactiveTintColor: "#666666",
+    }}>
     <Tabs.Screen
       name="index"
       options={{
-        title: "Home",
-        tabBarIcon: ({ color, focused }) => {
-          return focused ?
-            <FontAwesome name="home" size={24} color={color} /> :
-            <Ionicons name="home-outline" size={24} color={color} />
+        title: "Today's Habits",
+        tabBarIcon: ({ color, focused, size }) => {
+          return <MaterialCommunityIcons name="calendar-today" size={size} color={color} />;
+        }
+      }} />
+    <Tabs.Screen
+      name="streaks"
+      options={{
+        title: "Streaks",
+        tabBarIcon: ({ color, focused, size }) => {
+          return <MaterialCommunityIcons name="chart-line" size={size} color={color} />;
         }
       }} />
 
     <Tabs.Screen
-      name="login"
+      name="add-habit"
       options={{
-        title: "Login",
-        tabBarIcon: ({ color, focused }) => {
-          return <MaterialCommunityIcons name="login" size={24} color={color} />
+        title: "Add Habit",
+        tabBarIcon: ({ color, focused, size }) => {
+          return <MaterialCommunityIcons name="plus-circle" size={size} color={color} />;
         }
       }} />
   </Tabs>;
