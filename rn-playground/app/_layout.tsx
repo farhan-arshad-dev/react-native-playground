@@ -3,6 +3,7 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import React, { useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -26,16 +27,16 @@ function RouteGuard({ children }: { children: React.ReactNode }) {
 // which is a common and fundamental navigation pattern used in mobile applications.
 export default function RootLayout() {
   return (
-    // To pass the auth context (data/functions) using the context hook.
-    <AuthProvider>
-
-      {/* 
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* To pass the auth context (data/functions) using the context hook. */}
+      <AuthProvider>
+        {/* 
         Provided by the react-native-paper => It serves as a context provider, 
         making the defined theme available to all React Native Paper components within its scope. 
         */}
-      <PaperProvider>
+        <PaperProvider>
 
-        {/* 
+          {/* 
         This will ensure that our app's UI components avoid areas that could be obscured by 
         things like the device notches and status bar. Just a way for the app to adapt screen 
         in a safe way. 
@@ -43,15 +44,16 @@ export default function RootLayout() {
         In short The "safe area" refers to the region of the screen that is not 
         covered by these elements, ensuring that your app's content is fully visible and interactive.
        */}
-        <SafeAreaProvider>
-          <RouteGuard>
-            <Stack >
-              {/* don't want to show the header (toolbar) */}
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
-          </RouteGuard>
-        </SafeAreaProvider>
-      </PaperProvider>
-    </AuthProvider>
+          <SafeAreaProvider>
+            <RouteGuard>
+              <Stack >
+                {/* don't want to show the header (toolbar) */}
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              </Stack>
+            </RouteGuard>
+          </SafeAreaProvider>
+        </PaperProvider>
+      </AuthProvider>
+    </GestureHandlerRootView>
   );
 }
